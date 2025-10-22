@@ -45,19 +45,38 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt GLOB_DOTS
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -aFh --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -aFh --color $realpath'
 
 # Aliases 
 alias ls='ls -aFh --color=always'
+alias v='nvim'
 alias vim='nvim'
 alias c='clear'
+
+alias rebuild='sudo nixos-rebuild switch --flake ~/.nixos#--show-trace'
 
 # Shell integration
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+
+#######################################################
+# SPECIAL FUNCTIONS
+#######################################################
+
+# Automatically do an ls after each cd, z, or zoxide
+cd ()
+{
+	if [ -n "$1" ]; then
+		builtin cd "$@" && ls
+	else
+		builtin cd ~ && ls
+	fi
+}

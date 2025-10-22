@@ -8,11 +8,10 @@ dynamic_title = true
 
 decorations = "none"
 
-blur = true
-opacity = 0.9
+opacity = 1
 
-padding.x = 10
-padding.y = 10
+padding.x = 15
+padding.y = 15
 
 [window.dimensions]
 columns = 160
@@ -47,7 +46,7 @@ family = "JetBrainsMonoNL Nerd Font Mono"
 style = "Bold Italic"
 
 [colors.primary]
-background = "#0d0f18"
+background = "#0C0C12"
 foreground = "#a5b6cf"
 
 [colors.normal]
@@ -71,8 +70,8 @@ white = "#cbced3"
 yellow = "#ecd3a0"
 
 [colors.cursor]
-cursor = "#a5b6cf"
-text = "CellForeground"
+cursor = "CellForeground"
+text = "CellBackground"
 
 [colors.selection]
 text = "CellForeground"
