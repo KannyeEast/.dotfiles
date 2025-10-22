@@ -32,14 +32,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     type = 'git'
     style = 'powerline'
     foreground = 'red'
-    template = ":: {{ .UpstreamIcon }}{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }} * {{ end }} {{ if gt .Behind 0 }} \u2193 {{ end }}{{ if gt .Ahead 0 }} \u2191 {{ end }}"
+    template = ":: {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }} *{{ end }} {{ if gt .Behind 0 }}\u2193{{ end }}{{ if gt .Ahead 0 }}\u2191{{ end }}"
 
     [blocks.segments.properties]
       branch_icon = ''
-      github_icon = "\uf408 "
       commit_icon = '@'
       fetch_status = true
-      fetch_upstream_icon = true
 
 [[blocks]]
   type = 'rprompt'
