@@ -1,3 +1,10 @@
+# Set flag for debugging
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zmodload zsh/zprof
+fi
+
+
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -12,17 +19,18 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # Add zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+zinit light zsh-users/zsh-completions
+zinit light softmoth/zsh-vim-mode
 zinit light fdellwing/zsh-bat
+zinit light Aloxaf/fzf-tab
 
 # Add snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 
 # Load completions
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -C
 
 zinit cdreplay -q
 
@@ -33,6 +41,7 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.toml)"
 bindkey -v
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^a' vi-movement-mode
 
 # History
 HISTSIZE=5000
@@ -68,6 +77,8 @@ alias c='clear'
 
 alias rebuild='sudo nixos-rebuild switch --flake ~/.nixos# --show-trace'
 
+alias debug_zsh='time ZSH_DEBUGRC=1 zsh -i -c exit'
+
 # Shell integration
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
@@ -97,3 +108,10 @@ zshaddhistory() {
    }
    whence ${${(z)1}[$j]} >| /dev/null || return 1
  }
+
+
+
+# Set flag for debugging
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zprof
+fi
