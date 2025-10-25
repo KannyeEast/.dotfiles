@@ -15,6 +15,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light fdellwing/zsh-bat
 
 # Add snippets
 zinit snippet OMZP::git
@@ -55,12 +56,17 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -aFh --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -aFh --color $realpath'
 
 # Aliases 
-alias ls='ls -aFh --color=always'
+alias ls='eza --icons -a --group-directories-first'
+alias lls='eza --icons -a -lT -L 1 --git --header'
+
+alias grep='grep --color=auto'
+
 alias v='nvim'
 alias vim='nvim'
+
 alias c='clear'
 
-alias rebuild='sudo nixos-rebuild switch --flake ~/.nixos#--show-trace'
+alias rebuild='sudo nixos-rebuild switch --flake ~/.nixos# --show-trace'
 
 # Shell integration
 eval "$(fzf --zsh)"
@@ -80,3 +86,14 @@ cd ()
 		builtin cd ~ && ls
 	fi
 }
+
+# don't append "not found command" to history
+# https://www.zsh.org/mla/users//2014/msg00715.html
+# https://superuser.com/questions/902241/how-to-make-zsh-not-store-failed-command
+zshaddhistory() {
+   local j=1
+   while ([[ ${${(z)1}[$j]} == *=* ]]) {
+     ((j++))
+   }
+   whence ${${(z)1}[$j]} >| /dev/null || return 1
+ }
