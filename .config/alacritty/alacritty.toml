@@ -2,6 +2,9 @@
 live_config_reload = true
 working_directory = "None"
 
+[terminal]
+shell = { program = "zsh", args = ["-l", "-c", "tmux attach || tmux"] }
+
 [window]
 title = "Alacritty"
 dynamic_title = true
