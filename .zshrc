@@ -71,6 +71,7 @@ alias lls='eza --icons -a -lT -L 1 --git --header'
 alias grep='grep --color=auto'
 
 alias v='nvim'
+alias vi='nvim'
 alias vim='nvim'
 
 alias c='clear'
