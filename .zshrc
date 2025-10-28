@@ -64,6 +64,9 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -aFh --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls -aFh --color $realpath'
 
+# Environment variables
+export HYPRSHOT_DIR=$HOME/Pictures/Screenshots
+
 # Aliases 
 alias ls='eza --icons -a --group-directories-first'
 alias lls='eza --icons -a -lT -L 1 --git --header'
@@ -75,6 +78,8 @@ alias vi='nvim'
 alias vim='nvim'
 
 alias c='clear'
+
+alias dotcommit="git add . && git commit -m '.' && git push origin main"
 
 alias rebuild='sudo nixos-rebuild switch --flake ~/.nixos# --show-trace'
 
